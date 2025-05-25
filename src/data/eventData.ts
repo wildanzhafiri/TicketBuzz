@@ -10,6 +10,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 250,000 - IDR 1,200,000',
     category: 'Pop',
     image: '/images/sounds.png',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Berlokasi di jantung Ancol, venue ini dikelilingi oleh taman hijau dan dekat pantai. Tersedia foodcourt, toilet, area parkir luas, dan shuttle internal.',
+    tickets: [
+      { id: 1, name: 'Daily Pass', price: 250000 },
+      { id: 2, name: '3-Day Pass', price: 700000 },
+      { id: 3, name: 'VIP Pass', price: 1200000 },
+    ],
   },
   {
     id: 2,
@@ -20,6 +27,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 400,000 - IDR 1,500,000',
     category: 'Pop',
     image: '/images/hindia.png',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Jakarta International Stadium adalah venue terbesar di Asia Tenggara dengan kapasitas lebih dari 80.000 penonton, fasilitas modern dan akses MRT langsung.',
+    tickets: [
+      { id: 1, name: 'Presale 1 (Tribune)', price: 400000 },
+      { id: 2, name: 'Presale 2 (Festival)', price: 800000 },
+      { id: 3, name: 'VIP', price: 1500000 },
+    ],
   },
   {
     id: 3,
@@ -30,6 +44,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 350,000 - IDR 1,200,000',
     category: 'Pop',
     image: '/images/nadin.png',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Venue indoor ikonik yang sering digunakan untuk konser dan acara besar. Lokasi strategis dan akses mudah dari Senayan City.',
+    tickets: [
+      { id: 1, name: 'Regular', price: 350000 },
+      { id: 2, name: 'Tribune', price: 650000 },
+      { id: 3, name: 'VIP', price: 1200000 },
+    ],
   },
   {
     id: 4,
@@ -40,6 +61,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 450,000 - IDR 1,800,000',
     category: 'Electronic',
     image: '/images/wethefest.jpg',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Festival tahunan yang menampilkan musisi lokal dan internasional, diadakan di area outdoor yang luas dengan banyak stage dan area kuliner.',
+    tickets: [
+      { id: 1, name: '1-Day Pass', price: 450000 },
+      { id: 2, name: '3-Day Pass', price: 1200000 },
+      { id: 3, name: 'VIP 3-Day Pass', price: 1800000 },
+    ],
   },
   {
     id: 5,
@@ -50,6 +78,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 300,000 - IDR 1,300,000',
     category: 'Rock',
     image: '/images/dewa19.jpg',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Stadion Madya cocok untuk konser berkapasitas menengah, berada di tengah kompleks GBK dengan akses langsung dari pintu 1 dan 2.',
+    tickets: [
+      { id: 1, name: 'Tribune', price: 300000 },
+      { id: 2, name: 'Festival A', price: 800000 },
+      { id: 3, name: 'VIP Seating', price: 1300000 },
+    ],
   },
   {
     id: 6,
@@ -60,6 +95,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 200,000 - IDR 1,000,000',
     category: 'Pop',
     image: '/images/pamungkas.jpg',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Indoor concert hall dengan sound system premium dan kenyamanan tinggi di pusat kota, terhubung dengan Mall Kota Kasablanka.',
+    tickets: [
+      { id: 1, name: 'Regular', price: 200000 },
+      { id: 2, name: 'Tribune', price: 600000 },
+      { id: 3, name: 'VIP Standing', price: 1000000 },
+    ],
   },
   {
     id: 7,
@@ -70,6 +112,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 250,000 - IDR 950,000',
     category: 'Pop',
     image: '/images/kuntoaji.jpg',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Balai Sarbini adalah venue klasik yang nyaman dan sangat cocok untuk konser intim dengan suasana akustik.',
+    tickets: [
+      { id: 1, name: 'Silver', price: 250000 },
+      { id: 2, name: 'Gold', price: 600000 },
+      { id: 3, name: 'Platinum', price: 950000 },
+    ],
   },
   {
     id: 8,
@@ -80,6 +129,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 600,000 - IDR 2,000,000',
     category: 'Rock',
     image: '/images/the1975.jpg',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'Indoor stadium terbesar di Ancol, sering menjadi tempat konser internasional dengan kapasitas besar dan fasilitas eksklusif.',
+    tickets: [
+      { id: 1, name: 'Festival', price: 600000 },
+      { id: 2, name: 'VIP Festival', price: 1200000 },
+      { id: 3, name: 'Ultimate Experience', price: 2000000 },
+    ],
   },
   {
     id: 9,
@@ -90,6 +146,13 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 500,000 - IDR 1,600,000',
     category: 'Hip Hop',
     image: '/images/richbrian.jpg',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'JIExpo menjadi lokasi favorit untuk konser dan expo berskala besar. Tersedia akses transportasi publik dan area parkir luas.',
+    tickets: [
+      { id: 1, name: 'Regular', price: 500000 },
+      { id: 2, name: 'VIP Pit', price: 1000000 },
+      { id: 3, name: 'VVIP Experience', price: 1600000 },
+    ],
   },
   {
     id: 10,
@@ -100,5 +163,12 @@ export const eventData: EventItem[] = [
     priceRange: 'IDR 700,000 - IDR 2,200,000',
     category: 'Rock',
     image: '/images/arcticmonkeys.jpg',
+    venueMap: '/images/venue-map.svg',
+    venueInfo: 'ICE BSD adalah convention & exhibition hall modern dengan sound system canggih dan kapasitas konser besar di area Tangerang Selatan.',
+    tickets: [
+      { id: 1, name: 'Tribune', price: 700000 },
+      { id: 2, name: 'Festival', price: 1200000 },
+      { id: 3, name: 'VIP Zone', price: 2200000 },
+    ],
   },
 ];
