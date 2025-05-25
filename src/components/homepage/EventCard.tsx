@@ -1,12 +1,14 @@
 import React from 'react';
 import { EventItem } from '../../types/event';
 import calendar from '../../assets/calendar.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   event: EventItem;
 }
 
 const EventCard: React.FC<Props> = ({ event }) => {
+  const navigate = useNavigate();
   return (
     <div className="w-[450px] h-[480px] bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col">
       <div className="w-full h-[250px]">
@@ -28,7 +30,9 @@ const EventCard: React.FC<Props> = ({ event }) => {
 
         <div className="flex justify-between items-center">
           <p className="font-semibold text-lg text-black">{event.priceRange}</p>
-          <button className="px-5 py-2 bg-gradient-to-r from-[#8F2EE0] to-[#F966B6] text-white font-medium rounded-lg">Get Tickets</button>
+          <button onClick={() => navigate(`/concert/${event.id}`)} className="px-5 py-2 bg-gradient-to-r from-[#8F2EE0] to-[#F966B6] text-white font-medium rounded-lg">
+            Get Tickets
+          </button>
         </div>
       </div>
     </div>
