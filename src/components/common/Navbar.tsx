@@ -48,7 +48,7 @@ const Navbar: FC = () => {
   };
 
   return (
-    <section className="w-full py-3">
+    <section className="w-full py-3 bg-white fixed shadow-lg top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <button onClick={() => navigate('/')} className="text-4xl font-pacifico bg-gradient-to-r from-[#8F2EE0] to-[#FA66B6] text-transparent bg-clip-text">
           TicketBuzz
@@ -69,7 +69,7 @@ const Navbar: FC = () => {
 
         <div className="relative" ref={dropdownRef}>
           <button onClick={() => setOpenDropdown((prev) => !prev)}>
-            <img src={photoprofile} alt="photo-profile" width={40} height={40} />
+            <img src={photoprofile} alt="photo-profile" width={50} height={50} />
           </button>
 
           {openDropdown && isAuthenticated && (
