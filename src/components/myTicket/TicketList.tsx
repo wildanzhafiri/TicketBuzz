@@ -66,18 +66,32 @@ const TicketList: React.FC = () => {
     <div className="p-10">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-center mb-8">
-          <div className="bg-[#7878801F] px-1 rounded-lg flex gap-1">
-            {(['upcoming', 'past', 'all'] as OrderTab[]).map((tab) => {
+          <div className="bg-[#F1F1F1] px-1 py-1 rounded-md flex gap-1 items-center w-fit">
+            {(['upcoming', 'past', 'all'] as OrderTab[]).map((tab, index, arr) => {
               const labelMap = {
                 upcoming: 'Upcoming',
                 past: 'Past Tickets',
                 all: 'All Transaction History',
               };
               const isActive = activeTab === tab;
+
+              const nextTab = arr[index + 1];
+              const isNextActive = activeTab === nextTab;
+              const showDivider = index < arr.length - 1 && !isActive && !isNextActive;
+
               return (
-                <button key={tab} onClick={() => setActiveTab(tab)} className={`px-5 py-2 text-sm font-medium rounded-lg transition-all ${isActive ? 'bg-gradient-to-r from-[#A94AFD] to-[#F871BF] text-white' : 'text-gray-700'}`}>
-                  {labelMap[tab]}
-                </button>
+                <div key={tab} className="flex items-center">
+                  <button
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-5 py-2 text-sm font-semibold rounded-md transition-all duration-200 
+            ${isActive ? 'bg-gradient-to-r from-[#A94AFD] to-[#F871BF] text-white shadow' : 'text-black bg-transparent hover:text-[#A94AFD]'}
+          `}
+                  >
+                    {labelMap[tab]}
+                  </button>
+
+                  {showDivider && <div className="w-[1px] h-6 bg-[#C4C4C4] mx-1" />}
+                </div>
               );
             })}
           </div>
