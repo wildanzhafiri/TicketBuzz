@@ -24,9 +24,9 @@ const UpcomingRow: React.FC<Props> = ({ event, isFirst }) => {
         <p className="text-black font-medium text-lg truncate">{event.venue}</p>
         <p className="text-gray-500">{event.city}</p>
       </td>
-      <td className="py-4 font-medium text-lg">{event.priceRange}</td>
+      <td className="py-4 font-medium text-lg">IDR XXX</td>
       <td className="py-4 ">
-        <button className="bg-gradient-to-r from-[#8F2EE0] to-[#F966B6] text-white px-4 py-2 rounded-lg">Get Tickets</button>
+        <button className="bg-gradient-to-r from-[#8F2EE0] to-[#F966B6] text-white px-4 py-2 rounded-lg">Coming Soon</button>
       </td>
     </tr>
   );
