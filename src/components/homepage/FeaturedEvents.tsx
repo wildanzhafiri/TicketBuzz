@@ -17,7 +17,7 @@ const FeaturedEvents: React.FC<FeaturedEventsProps> = ({ selectedGenres, feature
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const ITEMS_PER_PAGE = 3;
 
   const fetchConcerts = async (page: number, genres: number[], featured: FeaturedType[]) => {

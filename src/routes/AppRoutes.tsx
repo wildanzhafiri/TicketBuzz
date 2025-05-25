@@ -3,7 +3,6 @@ import MainLayout from '../layouts/MainLayout';
 import Homepage from '../pages/Homepage';
 import EventDetail from '../pages/EventDetail';
 import Catalog from '../pages/Catalog';
-import ProtectedRoute from './ProtectedRoute';
 import MyTicket from '../pages/MyTicket';
 import OAuthCallback from '../components/auth/OAuthCallback';
 
