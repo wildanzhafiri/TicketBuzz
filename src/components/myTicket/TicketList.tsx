@@ -31,13 +31,17 @@ const TicketList: React.FC = () => {
 
       const formatted: Ticket[] = orders.map((order) => {
         const firstConcert = order.ticket_orders[0]?.ticket.concert;
-        const datetime = new Date(firstConcert.concert_start).toLocaleString('en-US', {
+        const date = new Date(firstConcert.concert_start);
+        const datePart = date.toLocaleDateString('en-US', {
           month: 'long',
           day: 'numeric',
           year: 'numeric',
+        });
+        const timePart = date.toLocaleTimeString('en-US', {
           hour: 'numeric',
           minute: '2-digit',
         });
+        const datetime = `${datePart} • ${timePart}`;
 
         return {
           id: order.id,
@@ -121,15 +125,15 @@ const TicketList: React.FC = () => {
                     <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-cover bg-center z-0" style={{ backgroundImage: `url(${ticket.image})` }}></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-[#CDCDCD] via-[#CDCDCD] to-transparent z-0"></div>
 
-                    <div className="relative z-10 flex gap-x-36 items-center">
+                    <div className="relative z-10 flex gap-x-36 items-center font-plus-jakarta-sans">
                       <div className="flex-col w-[300px]">
-                        <h2 className="font-semibold text-xl mb-1">{ticket.title}</h2>
-                        <p className="text-sm">{ticket.location}</p>
-                        <p className="text-sm flex items-center gap-2 mt-1">
+                        <h2 className="font-semibold text-3xl mb-1">{ticket.title}</h2>
+                        <p className="text-md text-[#000000A1]">{ticket.location}</p>
+                        <p className="text-lg flex items-center gap-2 mt-1">
                           <img src={calendar} alt="calendar" /> {ticket.datetime}
                         </p>
                       </div>
-                      <div className="text-left text-lg flex flex-col gap-1 pr-4">
+                      <div className="text-left font-plus-jakarta-sans font-normal text-xl flex flex-col pr-4">
                         {ticket.ticketInfo.map((info, idx) => (
                           <p key={idx}>{info}</p>
                         ))}

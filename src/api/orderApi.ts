@@ -1,4 +1,5 @@
 import axiosInstance from './axiosInstance';
+import { getAllVenues } from '../api/apiVenue';
 
 export interface OrderRequest {
   tickets: {
@@ -32,7 +33,8 @@ interface TicketResponse {
       name: string;
       concert_start: string;
       link_poster: string;
-      venue: {
+      venue_id: number;
+      venue?: {
         name: string;
       };
     };
@@ -61,11 +63,13 @@ export const getMyOrders = async (tab: OrderTab): Promise<{ orders: OrderRespons
     if (tab === 'upcoming') params.past = 0;
     else if (tab === 'past') params.past = 1;
 
+    const venueMap = await getAllVenues();
+
     do {
       const response = await axiosInstance.get<{ data: APIResponse }>('/orders/me', {
         params: { ...params, page },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}` || '',
         },
       });
 
@@ -75,7 +79,29 @@ export const getMyOrders = async (tab: OrderTab): Promise<{ orders: OrderRespons
       page++;
     } while (page <= lastPage);
 
-    const sortedOrders = allOrders.sort((a, b) => new Date(b.order_time).getTime() - new Date(a.order_time).getTime());
+    const enrichedOrders = allOrders.map((order) => ({
+      ...order,
+      ticket_orders: order.ticket_orders.map((to) => {
+        const concert = to.ticket.concert;
+        const venueId = concert.venue_id;
+        const venueName = venueMap[venueId] || 'TBA';
+
+        return {
+          ...to,
+          ticket: {
+            ...to.ticket,
+            concert: {
+              ...concert,
+              venue: {
+                name: venueName,
+              },
+            },
+          },
+        };
+      }),
+    }));
+
+    const sortedOrders = enrichedOrders.sort((a, b) => new Date(b.order_time).getTime() - new Date(a.order_time).getTime());
 
     return { orders: sortedOrders };
   } catch (error) {

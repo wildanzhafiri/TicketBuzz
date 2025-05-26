@@ -2,10 +2,13 @@ import HeroSection from '../components/homepage/HeroSection';
 import BrowseEvent from '../components/catalog/BrowseEvent';
 import CategorySection from '../components/homepage/CategorySection';
 import { FeaturedType } from '../api/concertApi';
-import { useState} from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import AuthModal from '../components/auth/AuthModal';
+import { useAuth } from '../context/AuthContext';
 
 const Catalog = () => {
+  const { isAuthenticated } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [featuredTypes, setFeaturedTypes] = useState<FeaturedType[]>([]);
@@ -42,6 +45,7 @@ const Catalog = () => {
 
   return (
     <main>
+      {!isAuthenticated && <AuthModal />}
       <HeroSection />
       <CategorySection onChange={handleGenreChange} onFeaturedChange={handleFeaturedChange} />
       <BrowseEvent />

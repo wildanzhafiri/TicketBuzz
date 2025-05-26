@@ -79,7 +79,6 @@ export const getAllConcert = async (page: number, limit: number, genreIds: numbe
   }
 };
 
-
 export const getConcertDetail = async (id: string) => {
   try {
     const res = await axiosInstance.get(`/concerts/${id}`);
@@ -118,4 +117,3 @@ export const searchConcertsByName = async (searchTerm: string, page: number, lim
     return { concerts: [], lastPage: 1 };
   }
 };
-

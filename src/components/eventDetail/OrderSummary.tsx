@@ -20,7 +20,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ orderItems, onConfirm }) =>
   const totalAmount = totalTicketPrice + serviceFee;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-8">
+    <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-28">
       <h3 className="text-lg font-semibold mb-4">Order Details</h3>
 
       {orderItems.length > 0 ? (
@@ -35,7 +35,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ orderItems, onConfirm }) =>
               </li>
             ))}
             <p className="flex justify-between">
-              Service Fee (2.5%): <span>IDR {serviceFee.toLocaleString()}</span>
+              Service Fee <span>IDR {serviceFee.toLocaleString()}</span>
             </p>
           </ul>
 

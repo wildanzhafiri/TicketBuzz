@@ -62,7 +62,7 @@ const BrowseEvent: React.FC = () => {
           <p className="text-2xl text-gray-500 mb-2">No events found {searchQuery ? `for "${searchQuery}"` : ''}</p>
         </div>
       ) : (
-        <div className="flex flex-wrap justify-center xl:px-2 gap-6 mb-8">
+        <div className="flex flex-wrap justify-start ml-36 xl:px-2 gap-6 mb-8">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}

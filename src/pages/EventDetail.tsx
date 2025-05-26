@@ -7,8 +7,11 @@ import { getTicketsByConcertId } from '../api/ticketApi';
 import { getConcertDetail } from '../api/concertApi';
 import { formatDateRange } from '../utils/dateFormatter';
 import { createTicketOrder } from '../api/orderApi';
+import { useAuth } from '../context/AuthContext';
+import AuthModal from '../components/auth/AuthModal';
 
 const EventDetail: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   const { id } = useParams<{ id: string }>();
   const [event, setEvent] = useState<EventItem | undefined>();
   const [tab, setTab] = useState<'map' | 'info'>('map');
@@ -48,7 +51,7 @@ const EventDetail: React.FC = () => {
           id: ticket.id,
           name: ticket.name,
           price: ticket.price,
-          description: ticket.description || 'No description',
+          description: concert.description || 'No description',
           quantity: 0,
           added: false,
         }))
@@ -107,59 +110,62 @@ const EventDetail: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#F3F4F6]">
-      <div className="relative w-full h-[400px]">
-        <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50 ">
-          <div className="flex flex-col justify-center max-w-7xl mx-auto absolute inset-0 px-10">
-            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-2">{event.title}</h1>
-            <div className="flex items-center gap-4 text-white text-lg">
-              <span>{event.date}</span> • <span>{event.location}</span>
+    <>
+      {!isAuthenticated && <AuthModal />}
+      <div className="bg-[#F3F4F6]">
+        <div className="relative w-full h-[400px]">
+          <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/50 ">
+            <div className="flex flex-col justify-center max-w-7xl mx-auto absolute inset-0 px-10">
+              <h1 className="text-4xl lg:text-5xl font-bold text-white mb-2">{event.title}</h1>
+              <div className="flex items-center gap-4 text-white text-lg">
+                <span>{event.date}</span> • <span>{event.location}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
-          <div className="text-center rounded-xl shadow bg-white">
-            <div className="flex justify-center gap-48 pt-5">
-              <button className={`relative pb-2 px-5 text-2xl font-semibold transition-colors duration-200 ${tab === 'map' ? 'text-black' : 'text-gray-400'}`} onClick={() => setTab('map')}>
-                Venue Map
-                <div className={`absolute left-0 right-0 bottom-0 h-[2px] mx-auto ${tab === 'map' ? 'bg-[#A94AFD] w-full' : 'bg-gray-300'}`} />
-              </button>
-              <button className={`relative pb-2 px-5 text-2xl font-semibold transition-colors duration-200 ${tab === 'info' ? 'text-black' : 'text-gray-400'}`} onClick={() => setTab('info')}>
-                Venue Information
-                <div className={`absolute left-0 right-0 bottom-0 h-[2px] mx-auto ${tab === 'info' ? 'bg-[#A94AFD] w-full' : 'bg-gray-300'}`} />
-              </button>
+        <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-8">
+            <div className="text-center rounded-xl shadow bg-white">
+              <div className="flex justify-center gap-48 pt-5">
+                <button className={`relative pb-2 px-5 text-2xl font-semibold transition-colors duration-200 ${tab === 'map' ? 'text-black' : 'text-gray-400'}`} onClick={() => setTab('map')}>
+                  Venue Map
+                  <div className={`absolute left-0 right-0 bottom-0 h-[2px] mx-auto ${tab === 'map' ? 'bg-[#A94AFD] w-full' : 'bg-gray-300'}`} />
+                </button>
+                <button className={`relative pb-2 px-5 text-2xl font-semibold transition-colors duration-200 ${tab === 'info' ? 'text-black' : 'text-gray-400'}`} onClick={() => setTab('info')}>
+                  Venue Information
+                  <div className={`absolute left-0 right-0 bottom-0 h-[2px] mx-auto ${tab === 'info' ? 'bg-[#A94AFD] w-full' : 'bg-gray-300'}`} />
+                </button>
+              </div>
+
+              <div className="text-left px-4 sm:px-8 md:p-10">
+                {tab === 'map' ? <img src={event.venueMap} alt="Venue Map" className="w-full h-[500px] object-cover rounded-md" /> : <p className="text-gray-700 text-base leading-relaxed whitespace-pre-line">{event.venueInfo}</p>}
+              </div>
             </div>
 
-            <div className="text-left px-4 sm:px-8 md:p-10">
-              {tab === 'map' ? <img src={event.venueMap} alt="Venue Map" className="w-full h-[500px] object-cover rounded-md" /> : <p className="text-gray-700 text-base leading-relaxed whitespace-pre-line">{event.venueInfo}</p>}
+            <div className="space-y-6 mt-10 rounded-xl shadow p-10 bg-white">
+              <h2 className="text-2xl font-bold mb-4">Ticket Category</h2>
+              {tickets.map((ticket) => (
+                <TicketCard
+                  key={ticket.id}
+                  id={ticket.id}
+                  name={ticket.name}
+                  price={ticket.price}
+                  quantity={ticket.quantity}
+                  description={ticket.description}
+                  added={ticket.added}
+                  onAdd={handleAdd}
+                  onIncrement={increment}
+                  onDecrement={decrement}
+                />
+              ))}
             </div>
           </div>
 
-          <div className="space-y-6 mt-10 rounded-xl shadow p-10 bg-white">
-            <h2 className="text-2xl font-bold mb-4">Ticket Category</h2>
-            {tickets.map((ticket) => (
-              <TicketCard
-                key={ticket.id}
-                id={ticket.id}
-                name={ticket.name}
-                price={ticket.price}
-                quantity={ticket.quantity}
-                description={ticket.description}
-                added={ticket.added}
-                onAdd={handleAdd}
-                onIncrement={increment}
-                onDecrement={decrement}
-              />
-            ))}
-          </div>
+          <OrderSummary onConfirm={handleConfirmPayment} orderItems={orderItems} />
         </div>
-
-        <OrderSummary onConfirm={handleConfirmPayment} orderItems={orderItems} />
       </div>
-    </div>
+    </>
   );
 };
 
