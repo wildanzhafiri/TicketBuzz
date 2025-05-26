@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import bgMyTicket from '../assets/background-myt-ticket.svg';
-import AuthModal from '../components/auth/AuthModal';
 import TicketList from '../components/myTicket/TicketList';
 import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
