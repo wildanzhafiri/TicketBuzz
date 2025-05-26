@@ -66,7 +66,7 @@ const FeaturedEvents: React.FC<FeaturedEventsProps> = ({ selectedGenres, feature
           <p className="text-xl text-gray-500 mb-4">No events found</p>
         </div>
       ) : (
-        <div className="flex flex-wrap justify-start ml-36 gap-6 mb-8">
+        <div className="flex flex-wrap justify-start ml-32 gap-6 mb-8">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
