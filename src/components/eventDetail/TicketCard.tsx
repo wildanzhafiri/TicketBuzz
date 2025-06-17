@@ -7,18 +7,23 @@ interface TicketCardProps {
   description?: string;
   quantity: number;
   added: boolean;
+  stock: number;
   onAdd: (id: number) => void;
   onIncrement: (id: number) => void;
   onDecrement: (id: number) => void;
 }
 
-const TicketCard: React.FC<TicketCardProps> = ({ id, name, price, description = 'Ticket description goes here...', quantity, added, onAdd, onIncrement, onDecrement }) => {
+const TicketCard: React.FC<TicketCardProps> = ({ id, name, price, description = 'Ticket description goes here...', quantity, added, stock, onAdd, onIncrement, onDecrement }) => {
+  const remainingStock = stock - quantity;
+
   return (
     <div className="border border-gray-300 rounded-2xl p-4 space-y-3">
       <div className="flex justify-between items-center">
         <div>
           <p className="font-semibold text-base">{name}</p>
           <p className="text-sm font-semibold text-black">IDR {price.toLocaleString()}</p>
+
+          <p className="text-xs text-gray-500 mt-0.5">Sisa Tiket: {remainingStock}</p>
         </div>
 
         {!added ? (
@@ -31,7 +36,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ id, name, price, description = 
               -
             </button>
             <span className="font-medium text-xl">{quantity}</span>
-            <button onClick={() => onIncrement(id)} className="text-3xl font-bold text-gray-700 hover:text-black">
+            <button onClick={() => onIncrement(id)} disabled={quantity >= stock} className={`text-3xl font-bold ${quantity >= stock ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:text-black'}`}>
               +
             </button>
           </div>

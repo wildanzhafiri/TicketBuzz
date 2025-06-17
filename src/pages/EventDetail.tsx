@@ -24,6 +24,7 @@ const EventDetail: React.FC = () => {
       description?: string;
       quantity: number;
       added: boolean;
+      stock: number;
     }[]
   >([]);
 
@@ -54,6 +55,7 @@ const EventDetail: React.FC = () => {
           description: concert.description || 'No description',
           quantity: 0,
           added: false,
+          stock: ticket.quota
         }))
       );
     };
@@ -66,7 +68,13 @@ const EventDetail: React.FC = () => {
   };
 
   const increment = (ticketId: number) => {
-    setTickets((prev) => prev.map((t) => (t.id === ticketId ? { ...t, quantity: t.quantity + 1 } : t)));
+    setTickets((prev) =>
+      prev.map((t) =>
+        t.id === ticketId && t.quantity < t.stock
+          ? { ...t, quantity: t.quantity + 1 }
+          : t
+      )
+    );
   };
 
   const decrement = (ticketId: number) => {
@@ -87,7 +95,7 @@ const EventDetail: React.FC = () => {
 
   if (!event) {
     return <div className="text-center py-20">Loading event...</div>;
-  }
+  } 
 
   const handleConfirmPayment = async () => {
     if (orderItems.length === 0) return;
@@ -154,6 +162,7 @@ const EventDetail: React.FC = () => {
                   quantity={ticket.quantity}
                   description={ticket.description}
                   added={ticket.added}
+                  stock={ticket.stock}
                   onAdd={handleAdd}
                   onIncrement={increment}
                   onDecrement={decrement}
